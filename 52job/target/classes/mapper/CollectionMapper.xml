@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.job52.dao.CollectionMapper" >
+
+    <resultMap id="BaseResultMap" type="com.job52.model.Collection" >
+        <id column="pid" property="pid" jdbcType="VARCHAR" />
+        <id column="gid" property="gid" jdbcType="VARCHAR" />
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        pid, gid, create_time
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.job52.model.CollectionKey" >
+        select 
+        <include refid="Base_Column_List" />
+        from collection
+        where pid = #{pid,jdbcType=VARCHAR}
+          and gid = #{gid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="com.job52.model.CollectionKey" >
+        delete from collection
+        where pid = #{pid,jdbcType=VARCHAR}
+          and gid = #{gid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.job52.model.Collection" >
+        insert into collection (pid, gid, create_time
+            )
+        values (#{pid,jdbcType=VARCHAR}, #{gid,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
+            )
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.job52.model.Collection" >
+        insert into collection
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="pid != null" >
+                pid,
+            </if>
+            <if test="gid != null" >
+                gid,
+            </if>
+            <if test="createTime != null" >
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="pid != null" >
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="gid != null" >
+                #{gid,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null" >
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.job52.model.Collection" >
+        update collection
+        <set >
+            <if test="createTime != null" >
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where pid = #{pid,jdbcType=VARCHAR}
+          and gid = #{gid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.job52.model.Collection" >
+        update collection
+        set create_time = #{createTime,jdbcType=TIMESTAMP}
+        where pid = #{pid,jdbcType=VARCHAR}
+          and gid = #{gid,jdbcType=VARCHAR}
+    </update>
+</mapper>
