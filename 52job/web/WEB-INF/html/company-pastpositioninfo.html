@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/maincss.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.js"></script>
+    <script src="../../javascript/model.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/bootstrap-table.js"></script>
+    <script src="../../bootstrap/bootstrap-table-zh-CN.js"></script>
+    <script src="../../bootstrap/bootstrap-table-export.js"></script>
+    <script src="../../bootstrap/tableExport.js"></script>
+
+
+</head>
+
+<body onload="table()">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="width: 20%">
+                <br><br>
+
+                <div>
+
+                    <img class="img-fluid img-circle" style="width: 160px;height: 160px" src="../img/profile.jpg"
+                         alt="">
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav nav-sidebar">
+                        <li>
+                            <a style="color: white" href="#about">企业信息管理</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#experience">简历搜索</a>
+                        </li>
+                        <li class="management">
+                            <a style="color: white" href="#education">职位管理</a>
+                        </li>
+                        <li style="display: none;color: white" class="existinfo">
+                            <a style="color: white" href="#education">已发布职业信息</a>
+                        </li>
+                        <li style="display: none" class="roughinfo">
+                            <a style="color: white" href="#education">草稿箱</a>
+                        </li>
+                        <li style="display: none" class="pastinfo">
+                            <a style="color: white" href="#education">历史职业信息</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#skills">应聘管理</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="col-md-10">
+            <br><br><br><br>
+
+            <div class="table-responsive " style="position:relative;left: -40px">
+                <div id="toolbar" class="btn-group">
+
+                    <button id="btn_delete" type="button" class="btn btn-default" onclick="del1()">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>批量删除
+                    </button>
+                </div>
+                <table class="table table-striped " id="table" style="overflow-x:scroll;width: 200%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function table() {
+
+
+        $('#table').bootstrapTable({
+            url: '',//修改
+            pagination: true,
+            striped: true,
+            toolbar: '#toolbar',
+            pageNumber: 1,
+            pageSize: 2,
+            pageList: [1, 2],
+            showRefresh: true,
+            showColumns: true,
+            showToggle: true,
+            undefinedText: '-',
+            selectItemName: 'select',
+            sortable: true,
+            showExport: true,
+            exportDataType: "basic",
+            exportTypes: ['excel'],
+            clickToSelect: true,
+            maintainSelected: true,
+            search: true,
+            showPaginationSwitch: true,
+            checkboxHeader: true,
+            columns: [{
+                checkbox: true,
+                title: '选择'
+
+            }, {
+                field: 'id',
+                title: 'ID',
+                visible: false
+            }, {
+                field: 'position',//命名需与后台一致
+                title: '职位'
+            }, {
+                field: 'salary',
+                title: '薪酬'
+            }, {
+                field: 'education',
+                title: '学历'
+            }, {
+                field: 'experience',
+                title: '工作经验'
+            }, {
+                field: 'city',
+                title: '工作城市'
+            }, {
+                field: 'introduction',
+                title: '简介'
+            }, {
+                field: 'operate',
+                title: '操作',
+                formatter: function (value, row, index) {
+
+                    var d = '<a href="#" mce_href="#" onclick="del2(\'' + row.id + '\' )" >删除</a> ';
+                    return d;
+                }
+            }],
+            data: [{
+                username: 1,
+
+
+            }, {
+                username: 2,
+
+            }]
+
+        });
+
+    }
+    function del2(index) {
+        var data = {"id": index};
+        data = JSON.stringify(data);
+        $.ajax({
+            url: '',
+            type: 'delete',
+            dataType: 'text',
+            data: data,
+            success: succFunction,
+            error: erryFunction
+        });
+
+        function erryFunction() {
+            alert("删除失败");
+
+        }
+
+        function succFunction() {
+
+
+            alert("删除成功");
+            window.location.reload();
+
+        }
+    }
+
+    function del1() {
+        var row = $("#table").bootstrapTable('getSelections');
+        var data = "[";
+        if (row == "") {
+            alert("请选择要删除的数据");
+        } else {
+            for (var i = 0; i < row.length; i++) {
+                data += ' {"id":"' + row[i].id + '" },';
+            }
+            var reg = /,$/gi;
+            data = data.replace(reg, "");
+            data += "]";
+            $.ajax({
+                url: '/v1/node/',
+                type: 'delete',
+                dataType: 'text',
+                data: data,
+
+                success: succFunction,
+                error: erryFunction//成功执行方法????
+            });
+
+            function erryFunction() {
+                alert("删除失败");
+
+            }
+
+            function succFunction() {
+
+
+                alert("删除成功");
+                window.location.reload();
+
+            }
+        }
+
+
+    }
+
+</script>
+</body>
+
+</html>

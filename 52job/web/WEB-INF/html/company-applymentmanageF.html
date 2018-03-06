@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/maincss.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.js"></script>
+    <script src="../../javascript/model.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/bootstrap-table.js"></script>
+    <script src="../../bootstrap/bootstrap-table-zh-CN.js"></script>
+    <script src="../../bootstrap/bootstrap-table-export.js"></script>
+    <script src="../../bootstrap/tableExport.js"></script>
+
+
+</head>
+
+<body onload="table()">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="width: 20%">
+                <br><br>
+
+                <div>
+
+                    <img class="img-fluid img-circle" style="width: 160px;height: 160px" src="../../img/profile.jpg"
+                         alt="">
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav nav-sidebar">
+                        <li>
+                            <a style="color: white" href="#about">企业信息管理</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#experience">简历搜索</a>
+                        </li>
+                        <li class="management">
+                            <a style="color: white" href="#education">职位管理</a>
+                        </li>
+                        <li style="display: none;color: white" class="existinfo">
+                            <a style="color: white" href="#education">已发布职业信息</a>
+                        </li>
+                        <li style="display: none" class="roughinfo">
+                            <a style="color: white" href="#education">草稿箱</a>
+                        </li>
+                        <li style="display: none" class="pastinfo">
+                            <a style="color: white" href="#education">历史职业信息</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#skills">应聘管理</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="col-md-10">
+            <br><br><br><br>
+
+            <div class="table-responsive " style="position:relative;left: -40px">
+
+                <table class="table table-striped " id="table" style="overflow-x:scroll;width: 200%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function table() {
+
+
+        $('#table').bootstrapTable({
+            url: '',//修改
+            pagination: true,
+            striped: true,
+            pageNumber: 1,
+            pageSize: 2,
+            pageList: [1, 2],
+            showRefresh: true,
+            showColumns: true,
+            showToggle: true,
+            undefinedText: '-',
+            selectItemName: 'select',
+            sortable: true,
+            showExport: true,
+            exportDataType: "basic",
+            exportTypes: ['excel'],
+            clickToSelect: true,
+            search: true,
+            showPaginationSwitch: true,
+
+            columns: [{
+                field: "pid",
+                title: "ID",
+                visible: false
+            }, {
+                field: "rid",
+                title: "ID",
+                visible: false
+            }, {
+                field: 'name',//命名需与后台一致
+                title: '申请人'
+            }, {
+                field: 'resume',
+                title: '简历',
+                formatter: function (value, row, index) {
+                    var l = '<a href="#" mce_href="#" onclick="look(\'' + row.pid + '\',\'' + row.rid + '\' )" >点击查看</a> ';
+                    return l;
+                }
+            }, {
+                field: 'position',
+                title: '申请职位'
+            }, {
+                field: 'operate',
+                title: '操作',
+                formatter: function (value, row, index) {
+
+                    var a = '<a href="#" mce_href="#" onclick="accept1(\'' + row.id + '\' )" >接受</a> ';
+                    var r = '<a href="#" mce_href="#" onclick="refuse(\'' + row.id + '\' )" >拒绝</a> ';
+                    return a + "| " + r;
+                }
+            }],
+            data: [{
+                username: 1,
+
+
+            }, {
+                username: 2,
+
+            }]
+
+        });
+    }
+
+    function look(pid, rid) {
+        //$("#mymode").modal();
+    var data = {
+            "pid": pid,
+            "rid": rid
+        };
+        data=JSON.stringify(data);
+        $.ajax({
+            url:'',
+            type:'get',
+            dataType:'json',
+            data:data,
+            success:succFunction,
+            error:erryFunction
+        });
+        function erryFunction() {
+            alert("获取简历失败");
+        }
+
+        function succFunction(result) {
+
+            var json = eval(result);
+            document.getElementById("img").setAttribute("src", json.img);//img需与后台对应
+            $("#name").val(json.name);
+            $("#born").val(json.born);
+            if (json.sex == "男") {
+                $('.sex').get(0).checked = true;
+            }
+            else {
+                $('.sex').get(1).checked = true;
+            }
+            $("#work_date").val(json.work_date);
+            $("#tel").val(json.tel);
+            $("#job_state").val(json.job_state);
+            $("#email").val(json.email);
+            $("#address").val(json.address);
+            $("#school").val(json.school);
+            $("#major").val(json.major);
+            if (json.education == "小学") {
+                $('#education')[0].selectedIndex = 1;
+            } else if (json.education == "初中") {
+                $('#education')[0].selectedIndex = 2;
+            } else if (json.education == "高中") {
+                $('#education')[0].selectedIndex = 3;
+            } else if (json.education == "大专") {
+                $('#education')[0].selectedIndex = 4;
+            } else if (json.education == "大学") {
+                $('#education')[0].selectedIndex = 5;
+            } else if (json.education == "硕士研究生") {
+                $('#education')[0].selectedIndex = 6;
+            } else {
+                $('#education')[0].selectedIndex = 7;
+            }
+            if (json.resume_state == "公开") {
+                $('#resume_state')[0].selectedIndex = 1;
+            } else {
+                $('#resume_state')[0].selectedIndex = 2;
+            }
+            $("#experience").val(json.experience);
+document.getElementById("appendix").setAttribute("href",json.appendix);
+            $("#mymode").modal();
+
+
+
+        }
+
+    }
+
+    function accept1(index) {
+        var data = {
+            "id": index,
+            "status": 1
+        };
+        data=JSON.stringify(data);
+        $.ajax({
+            url: '/v1/node/',
+            type: 'delete',
+            dataType: 'text',
+            data: data,
+            success: succFunction,
+            error: erryFunction//成功执行方法????
+        });
+
+        function erryFunction() {
+            alert("处理失败");
+        }
+
+        function succFunction() {
+
+
+            alert("处理成功");
+            window.location.reload();
+
+        }
+    }
+
+    function refuse(index) {
+        var data = {
+            "id": index,
+            "status": 2
+        };
+        $.ajax({
+            url: '/v1/node/',
+            type: 'delete',
+            dataType: 'text',
+            data: data,
+
+            success: succFunction,
+            error: erryFunction//成功执行方法????
+        });
+
+        function erryFunction() {
+            alert("处理失败");
+        }
+
+        function succFunction() {
+
+
+            alert("处理成功");
+            window.location.reload();
+
+        }
+    }
+</script>
+<div class="modal fade" id="mymode" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">简历信息</h4>
+            </div>
+            <div class="modal-body" style="position: relative;text-align: center; ">
+                <form action="#" method="post" enctype="multipart/form-data"><!--修改-->
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <img alt="请添加图片" class="img-thumbnail" id="img" src="#"
+                                     style="width: 160px;height: 160px ;text-align: center;line-height: 140px"
+                                     />
+
+                            </div>
+
+                            <div class="col-md-7">
+                                <div> 姓名：&nbsp;&nbsp;<input type="text" style="width: 140px" id="name" name="name" readonly="readonly"></div>
+                                <br>
+                                <div>出生日期：&nbsp;<input type="date" id="born" name="date" readonly="readonly"></div>
+                                <br>
+                                <div> 性别：&nbsp;&nbsp;<input type="radio" name="sex"
+                                                            class="sex" disabled="disabled">男&nbsp;&nbsp;&nbsp;<input
+                                        type="radio" name="sex" class="sex" disabled="disabled">女&nbsp;&nbsp;&nbsp;
+                                </div>
+                                <br>
+                                <div>开始工作年份：<input type="month" id="work_date" name="month" readonly="readonly"></div>
+                                <br><br>
+
+                            </div>
+                        </div>
+                        <div style="white-space:nowrap;">
+                            <div style="float: left">手机:&nbsp;<input type="tel" id="tel" name="tel"readonly="readonly" ></div>
+                            <div style="float: right"> 求职状态：&nbsp;<input type="text" id="job_state" name="jobstate" readonly="readonly"></div>
+                        </div>
+                        <br><br>
+                        <div style="white-space: nowrap">
+                            <div style="float: left">邮箱:&nbsp;<input type="email" id="email" name="email" readonly="readonly"></div>
+                            <div style="float: right">居住地:&nbsp;<input type="text" id="address" name="address" readonly="readonly"></div>
+                        </div>
+                        <br><br>
+                        <div style="float: left">
+                            毕业院校：&nbsp;<input type="text" style="width: 260px" id="school" name="school" readonly="readonly"></div>
+                        <br><br>
+                        <div style="float: left"> 毕业时间：&nbsp;<input type="month" style="width: 260px"
+                                                                    id="graduate-time" name="time" readonly="readonly"></div>
+
+                        <br><br>
+                        <div style="float: left">
+
+                            专业：&nbsp;&nbsp;&nbsp;<input type="text" style="width: 260px" id="major" name="major" readonly="readonly"></div>
+                        <br><br>
+                        <div style="float: left"> 最高学历：&nbsp;<!--<input type="text" style="width: 260px">-->
+                            <select
+                                    style="width: 260px;text-align: center;" id="education" name="education" disabled="disabled">
+                                <option value="">请选择</option>
+                                <option value="小学">小学</option>
+                                <option value="初中">初中</option>
+                                <option value="高中">高中</option>
+                                <option value="大专">大专</option>
+                                <option value="大学">大学</option>
+                                <option value="硕士研究生">硕士研究生</option>
+                                <option value="博士研究生">博士研究生</option>
+                            </select>
+                        </div>
+                        <br><br>
+                        <div style="white-space: nowrap">
+                            <div style="float: left">
+                                简历状态：&nbsp;<select style="width: 100px;text-align: center;" id="resume_state" name="resume_state" disabled="disabled">
+                                <option value="">请选择</option>
+                                <option value="公开">公开</option>
+                                <option value="不公开">不公开</option>
+                            </select>
+                            </div>
+
+
+                            <div style="float: right">
+                                <a href="" target="_blank" id="appendix">附件</a>
+                               </div>
+
+                            <br>
+                            <textarea style="height: 100px;width: 100%"
+                                      id="experience" readonly="readonly"></textarea>
+
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close2">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+
+</html>
