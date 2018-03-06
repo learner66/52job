@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
+    <script type="text/javascript" src="../javascript/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: #f8f6e9;
+        }
+
+        .mycenter {
+            margin-top: 100px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            width: 500px;
+            padding: 5%;
+            padding-left: 5%;
+            padding-right: 5%;
+        }
+
+        .mycenter mysign {
+            width: 440px;
+        }
+
+        .mycenter input, checkbox, button {
+            margin-top: 2%;
+            margin-left: 10%;
+            margin-right: 10%;
+        }
+
+        .mycheckbox {
+            margin-top: 10px;
+            margin-left: 40px;
+            margin-bottom: 10px;
+            height: 10px;
+        }
+
+        a:link {
+            text-decoration: none;
+
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: red;
+        }
+
+        a:active {
+            text-decoration: none;
+            color: yellow;
+        }
+
+        a:visited {
+            text-decoration: none;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+<form action="" method="post">
+    <div class="mycenter">
+        <div class="mysign">
+            <div class="col-lg-11 text-center text-info">
+                <h2>用户登录</h2>
+            </div>
+            <div class="col-lg-10">
+                <input type="text" class="form-control" name="userName" placeholder="请输入账户名" required autofocus/>
+            </div>
+            <div class="col-lg-10"></div>
+            <div class="col-lg-10">
+                <input type="password" class="form-control" name="passWord" placeholder="请输入密码" required autofocus/>
+            </div>
+            <div class="col-lg-10"></div>
+            <div class="col-lg-10 mycheckbox checkbox">
+                <input type="checkbox" class="col-lg-1">记住密码</input>
+            </div>
+            <div class="col-lg-10"></div>
+            <div class="col-lg-10">
+                <input type="submit" class="btn btn-success col-lg-12" value="登录">
+            </div>
+            <div class="col-lg-10"></div>
+            <div class="col-lg-11" style="text-align: center">
+                <a href="">忘记密码？</a>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

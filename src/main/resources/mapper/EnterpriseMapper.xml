@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.job52.dao.EnterpriseMapper" >
+
+    <resultMap id="BaseResultMap" type="com.job52.model.Enterprise" >
+        <id column="eid" property="eid" jdbcType="VARCHAR" />
+        <result column="e_username" property="eUsername" jdbcType="VARCHAR" />
+        <result column="e_password" property="ePassword" jdbcType="VARCHAR" />
+        <result column="ename" property="ename" jdbcType="VARCHAR" />
+        <result column="adddress" property="adddress" jdbcType="VARCHAR" />
+        <result column="e_type" property="eType" jdbcType="VARCHAR" />
+        <result column="e_number" property="eNumber" jdbcType="INTEGER" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="image_url" property="imageUrl" jdbcType="VARCHAR" />
+        <result column="descriptionte" property="descriptionte" jdbcType="LONGVARCHAR" />
+        <result column="contact" property="contact" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        eid, e_username, e_password, ename, adddress, e_type, e_number, email, image_url, 
+        descriptionte, contact
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from enterprise
+        where eid = #{eid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from enterprise
+        where eid = #{eid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.job52.model.Enterprise" >
+        insert into enterprise (eid, e_username, e_password, 
+            ename, adddress, e_type, 
+            e_number, email, image_url, 
+            descriptionte, contact)
+        values (#{eid,jdbcType=VARCHAR}, #{eUsername,jdbcType=VARCHAR}, #{ePassword,jdbcType=VARCHAR}, 
+            #{ename,jdbcType=VARCHAR}, #{adddress,jdbcType=VARCHAR}, #{eType,jdbcType=VARCHAR}, 
+            #{eNumber,jdbcType=INTEGER}, #{email,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+            #{descriptionte,jdbcType=LONGVARCHAR}, #{contact,jdbcType=VARCHAR})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.job52.model.Enterprise" >
+        insert into enterprise
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="eid != null" >
+                eid,
+            </if>
+            <if test="eUsername != null" >
+                e_username,
+            </if>
+            <if test="ePassword != null" >
+                e_password,
+            </if>
+            <if test="ename != null" >
+                ename,
+            </if>
+            <if test="adddress != null" >
+                adddress,
+            </if>
+            <if test="eType != null" >
+                e_type,
+            </if>
+            <if test="eNumber != null" >
+                e_number,
+            </if>
+            <if test="email != null" >
+                email,
+            </if>
+            <if test="imageUrl != null" >
+                image_url,
+            </if>
+            <if test="descriptionte != null" >
+                descriptionte,
+            </if>
+            <if test="contact != null" >
+                contact,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="eid != null" >
+                #{eid,jdbcType=VARCHAR},
+            </if>
+            <if test="eUsername != null" >
+                #{eUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="ePassword != null" >
+                #{ePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="adddress != null" >
+                #{adddress,jdbcType=VARCHAR},
+            </if>
+            <if test="eType != null" >
+                #{eType,jdbcType=VARCHAR},
+            </if>
+            <if test="eNumber != null" >
+                #{eNumber,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null" >
+                #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="descriptionte != null" >
+                #{descriptionte,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contact != null" >
+                #{contact,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.job52.model.Enterprise" >
+        update enterprise
+        <set >
+            <if test="eUsername != null" >
+                e_username = #{eUsername,jdbcType=VARCHAR},
+            </if>
+            <if test="ePassword != null" >
+                e_password = #{ePassword,jdbcType=VARCHAR},
+            </if>
+            <if test="ename != null" >
+                ename = #{ename,jdbcType=VARCHAR},
+            </if>
+            <if test="adddress != null" >
+                adddress = #{adddress,jdbcType=VARCHAR},
+            </if>
+            <if test="eType != null" >
+                e_type = #{eType,jdbcType=VARCHAR},
+            </if>
+            <if test="eNumber != null" >
+                e_number = #{eNumber,jdbcType=INTEGER},
+            </if>
+            <if test="email != null" >
+                email = #{email,jdbcType=VARCHAR},
+            </if>
+            <if test="imageUrl != null" >
+                image_url = #{imageUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="descriptionte != null" >
+                descriptionte = #{descriptionte,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="contact != null" >
+                contact = #{contact,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where eid = #{eid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.job52.model.Enterprise" >
+        update enterprise
+        set e_username = #{eUsername,jdbcType=VARCHAR},
+            e_password = #{ePassword,jdbcType=VARCHAR},
+            ename = #{ename,jdbcType=VARCHAR},
+            adddress = #{adddress,jdbcType=VARCHAR},
+            e_type = #{eType,jdbcType=VARCHAR},
+            e_number = #{eNumber,jdbcType=INTEGER},
+            email = #{email,jdbcType=VARCHAR},
+            image_url = #{imageUrl,jdbcType=VARCHAR},
+            descriptionte = #{descriptionte,jdbcType=LONGVARCHAR},
+            contact = #{contact,jdbcType=VARCHAR}
+        where eid = #{eid,jdbcType=VARCHAR}
+    </update>
+</mapper>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/maincss.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/bootstrap-table.js"></script>
+    <script src="../../bootstrap/bootstrap-table-zh-CN.js"></script>
+    <script src="../../bootstrap/bootstrap-table-export.js"></script>
+    <script src="../../bootstrap/tableExport.js"></script>
+
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="width: 20%">
+                <br><br>
+
+                <div>
+
+                    <img class="img-fluid img-circle" style="width: 160px;height: 160px" src="../img/profile.jpg" alt="">
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav nav-sidebar">
+                        <li>
+                            <a style="color: white" href="admin-person.html">个人用户管理</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="admin-company.html">企业用户管理</a>
+                        </li>
+                        <li class="management">
+                            <a style="color: white" href="admin-position.html">职位信息管理</a>
+                        </li>
+
+                        <li>
+                            <a style="color: white" href="admin-data.html">数据统计管理</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <br><br><br><br>
+
+        <div class="col-md-10 col-md-offset-2">
+            <div class="container-fluid">
+                <div class="row">
+                    <form action="" method="get">
+                        <div id="searchbox" class="col-md-6 ">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="请输入检索关键字" id="searchdata">
+                                <span class="input-group-btn">
+                    <button class="btn btn-default" style="width: 75px" id="search">检索</button>
+                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+                           <p>按：发布时间、职位类别、企业、日搜索量、周搜索量 排序</p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <br><br><br>
+            <div class="table-responsive  "style="position:relative;left: -40px">
+                <div id="toolbar" class="btn-group">
+                    <button id="btn_delete" type="button" class="btn btn-default" onclick="del2()">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                    </button>
+                </div>
+                <table class="table table-striped " id="table" style="overflow-x:scroll;width: 200%">
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    function del2() {
+        var row = $("#table").bootstrapTable('getSelections');
+        var data = "[";
+        if (row == "") {
+            alert("请选择要删除的数据");
+        } else {
+            for (var i = 0; i < row.length; i++) {
+                data += ' {"id":"' + row[i].id + '" },';
+            }
+            var reg = /,$/gi;
+            data = data.replace(reg, "");
+            data += "]";
+            $.ajax({
+                url: '/v1/node/',
+                type: 'delete',
+                dataType: 'text',
+                data: data,
+
+                success: succFunction,
+                error: erryFunction//成功执行方法????
+            });
+
+
+            function erryFunction() {
+                alert("删除失败");
+            }
+
+            function succFunction() {
+
+
+                alert("删除成功");
+                $("#search").click();
+
+            }
+        }}
+    $(document).ready(function(){
+        $("#search").click(function () {
+         var searchdata=$("#searchdata").val();
+            var data = {
+                "searchdata": searchdata   //修改
+            }
+            data = JSON.stringify(data);
+            $.ajax({
+                url: '/v1/node/',//修改
+                type: 'post',
+                dataType: 'text',
+                data: data,
+                success: succFunction,
+                error: erryFunction
+            });
+
+
+            function erryFunction() {
+                alert("搜索失败");
+            }
+
+            function succFunction() {
+                $('#table').bootstrapTable({
+                    url: '',//修改
+                    method: 'post',
+                    pagination: true,
+                    striped: true,
+                    toolbar: '#toolbar',
+                    pageNumber: 1,
+                    pageSize: 2,
+                    pageList: [1, 2],
+                    showRefresh: true,
+                    showColumns: true,
+                    showToggle: true,
+                    undefinedText: '-',
+                    selectItemName: 'select',
+                    sortable: true,  showExport: true,
+                    exportDataType: "basic",
+                    exportTypes: ['excel'],
+                    clickToSelect: true,
+                    maintainSelected: true,
+                    search: true,
+                    showPaginationSwitch: true,
+                    checkboxHeader:true,
+                    columns: [{
+                        checkbox: true,
+                        title: '选择'
+
+                    },{
+                        field:'id',
+                        title:'ID',
+                        visible: false
+                    },{
+                        field: 'position',//命名需与后台一致
+                        title: '职位'
+                    }, {
+                        field: 'company',
+                        title: '企业'
+                    }, {
+                        field: 'department',
+                        title: '部门'
+                    }, {
+                        field: 'data',
+                        title: '被搜索数据'
+                    }, {
+                        field: 'operate',
+                        title: '操作',
+                        formatter: function (value, row, index) {
+
+                            var t = '<a href="#" mce_href="#" onclick="top2(\'' + row.id + '\' )" >置顶</a> ';
+                            return t;
+                        }
+                    }]
+
+                });
+            }
+                function top2(index){
+                    var id=index;
+                    var data = {
+                        "id": id   //修改
+                    }
+                    data = JSON.stringify(data);
+                    $.ajax({
+                        url: '/v1/node/',//修改
+                        type: 'post',
+                        dataType: 'text',
+                        data: data,
+                        success: succFunction,
+                        error: erryFunction
+                    });
+
+
+                    function erryFunction() {
+                        alert("置顶失败");
+                    }
+                    function succFunction() {
+                        alert("置顶成功");
+                    }
+                }
+
+        });
+        $('#table').bootstrapTable({
+            url:'',//修改
+            pagination: true,
+            striped: true,
+            toolbar: '#toolbar',
+            pageNumber: 1,
+            pageSize: 2,
+            pageList: [1, 2],
+            showRefresh: true,
+            showColumns: true,
+            showToggle: true,
+            undefinedText:'-',
+            selectItemName:'select',
+            sortable:true, showExport: true,
+            exportDataType: "basic",
+            exportTypes: ['excel'],
+            clickToSelect: true,
+            maintainSelected: true,
+            search: true,
+            showPaginationSwitch: true,
+            checkboxHeader:true,
+            columns: [{
+                checkbox: true,
+                title: '选择'
+
+            },{
+                field:'id',
+                title:'ID',
+                visible: false
+            },{
+                field: 'position',//命名需与后台一致
+                title: '职位'
+            }, {
+                field: 'company',
+                title: '企业'
+            },{
+                field: 'department',
+                title: '部门'
+            },{
+                field: 'data',
+                title: '被搜索数据'
+            },{
+                field:'operate',
+                title:'操作',
+
+            }]
+
+        });
+
+    })
+
+
+   /* $('#table').bootstrapTable({
+        url:'',//修改
+        pagination: true,
+        striped: true,
+
+        pageNumber: 1,
+        pageSize: 2,
+        pageList: [1, 2],
+        showRefresh: true,
+        showColumns: true,
+        showToggle: true,
+        undefinedText:'-',
+        checkboxHeader: false,
+        selectItemName:'select',
+        sortable:true,
+        columns: [{
+            field: 'id',//命名需与后台一致
+            title: 'ID'
+        }, {
+            field: 'position',
+            title: '职位'
+        }, {
+            field: 'company',
+            title: '企业'
+        },{
+            field: 'department',
+            title: '部门'
+        },{
+            field: '被搜索数据',
+            title: '邮箱'
+        },{
+            field:'操作',
+            title:'Item Operate',
+            formatter:function(value,row,index) {
+
+                var t = '<a href="#" mce_href="#" onclick="top2(\''+ row.phone +'\' )" >置顶</a> ';
+                return t;
+            }
+        }],
+        data: [{//修改
+            username: 1,
+            phone: 'Item 1',
+            email: '$1'
+
+        }, {
+            id: 2,
+            name: 'Item 2',
+            price: '$2'
+        }]
+
+    });
+    function top2(index){
+        alert("hello"+index);
+    }*/
+</script>
+</body>
+
+</html>

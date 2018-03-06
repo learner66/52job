@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/maincss.css" rel="stylesheet">
+
+
+    <script src="../../jquery/jquery-3.2.1.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../jquery/jquery.validate.min.js"></script>
+    <script src="../../jquery/messages_zh.js"></script>
+
+    <style>
+        .error {
+            color: black;
+            font-size: smaller;
+            font-weight: 100;
+
+        }
+    </style>
+    <script>
+        jQuery.validator.addMethod("isMobile", function (value, element) {
+            var length = value.length;
+            var mobile = /^(13[0-9]{9})|(18[0-9]{9})|(14[0-9]{9})|(17[0-9]{9})|(15[0-9]{9})$/;
+            return this.optional(element) || (length == 11 && mobile.test(value));
+        }, "请正确填写您的手机号码");
+       function check() {
+           var src = document.getElementById("img").getAttribute("src");
+           var fileVal = document.getElementById("appendix").value;
+           if(src=="")
+           {
+               alert("请选择照片");
+           }else if(!fileVal){
+               alert("没有添加附件！");
+
+           $("#form").validate({
+               rules: {
+                   name:{
+                       required:true
+                   },
+                   date:{
+                       required:true
+                   },
+                   month:{
+                       required:true
+                   },
+                   tel: {
+                       required: true,
+                       minlength: 11,
+                       isMobile: true
+                   },
+                   jobstate:{
+                       required:true
+                   },
+                   email:{
+                       required:true,
+                       eamil:true
+                   },
+                   address:{
+                       required:true
+                   },
+                   school:{
+                       required:true
+                   },
+                   time:{
+                       required:true
+                   },
+                   major:{
+                       required:true
+                   },
+                   education:{
+                       required:true
+                   },
+                   resume_state:{
+                       required:true
+                   }
+               },
+               messages: {
+                   name:{
+                       required:"请输入姓名"
+                   },
+                   date:{
+                       required:"请输入出生日期"
+                   },
+                   month:{
+                       required:"请输入工作年份"
+                   },
+                   tel: {
+                       required: "请输入手机号",
+                       minlength: "请输入正确手机号",
+                       isMobile: "请输入正确的手机号"
+                   },
+                   jobstate:{
+                       required:"请输入求职状态"
+                   },
+                   email:{
+                       required:"请输入邮箱",
+                       eamil:"请输入正确的邮箱"
+                   },
+                   address:{
+                       required:"请输入居住地址"
+                   },
+                   school:{
+                       required:"请输入毕业院校"
+                   },
+                   time:{
+                       required:"请输入毕业时间"
+                   },
+                   major:{
+                       required:"请输入专业"
+                   },
+                   education:{
+                       required:"请选择最高学历"
+                   },
+                   resume_state:{
+                       required:"请选择简历状态"
+                   }
+               },
+               submitHandler: function (form) {
+                   $(form).ajaxSubmit({
+                       success: function () {
+                          alert("创建成功");
+                           window.location.reload();
+                       }
+                   });
+               }
+
+
+           });
+           $("#save").click();
+       }
+       }
+
+
+    </script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="width: 20%">
+                <br><br>
+
+                <div>
+
+                    <img class="img-fluid img-circle" style="width: 160px;height: 160px" src="../img/profile.jpg"
+                         alt="">
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav nav-sidebar">
+                        <li>
+                            <a style="color: white" href="#about">简历管理</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#experience">简历创建</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+
+        <div class="col-md-10">
+            <br><br>
+
+            <div class="container-fluid">
+                <form id="form" action="">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <img alt="请添加图片" class="img-thumbnail" id="img" src=""
+                                 style="width: 160px;height: 160px ;text-align: center;line-height: 140px"
+                                 onclick="upload()"/>
+                            <input type="file" id="fileToUpload" name="fileToUpload" style="display: none"/>
+                        </div>
+
+                        <div class="col-md-7">
+                            <div style="white-space: nowrap"> 姓名：<input type="text" name="name" >&nbsp;&nbsp;&nbsp;
+                                出生日期：<input type="date" name="date" ></div>
+                            <br>
+                            <div style="white-space: nowrap">性别：&nbsp;&nbsp;<input type="radio" name="sex"
+                                                                                   checked="checked">男&nbsp;&nbsp;&nbsp;<input
+                                    type="radio" name="sex">女&nbsp;&nbsp;&nbsp;
+                                开始工作年份：<input type="month" name="month"></div>
+                            <br>
+                            <div style="white-space: nowrap"> 手机：<input type="tel"  name="tel">&nbsp;&nbsp;&nbsp;
+                                求职状态：<input type="text" name="jobstate"></div>
+                            <br>
+                            <div style="white-space: nowrap"> 邮箱：<input type="email" name="email">&nbsp;&nbsp;&nbsp;&nbsp;
+                                居住地：<input type="text" name="address"></div>
+                        </div>
+                    </div>
+                    <div id="container"></div>
+                    <br><br><br>
+                    <div style="position: relative;left: -70px;white-space: nowrap">
+                        毕业院校：<input type="text" style="width: 260px" name="school" >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        毕业时间：<input type="month" style="width: 260px" name="time">
+                    </div>
+                    <br>
+                    <div style="position: relative;left: -70px;white-space: nowrap">
+                        &nbsp;&nbsp;
+                        专业：<input type="text" style="width: 260px" name="major">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        最高学历:<select style="width: 260px;text-align: center;"name="education">
+                        <option value="">请选择</option>
+                        <option value="小学">小学</option>
+                        <option value="初中">初中</option>
+                        <option value="高中">高中</option>
+                        <option value="大专">大专</option>
+                        <option value="大学">大学</option>
+                        <option value="硕士研究生">硕士研究生</option>
+                        <option value="博士研究生">博士研究生</option>
+                    </select>
+                    </div>
+                    <br>
+                    <div style="position: relative;left: -70px;white-space: nowrap">
+                        &nbsp; 简历状态：<select style="width: 100px;text-align: center;" name="resume_state">
+                        <option value="">请选择</option>
+                        <option value="公开">公开</option>
+                        <option value="不公开">不公开</option>
+                    </select>
+                    </div>
+
+
+                    <div style="position: relative;left: -50px">
+                        <input type="file" style="float: right;display: none" value="添加附件" id="appendix"/>
+                        <input type="button" value="添加附件" style="float: right" onclick="app()"/>
+                        <br><br>
+                        <textarea style="height: 100px;width: 100%" placeholder="此处填写工作经历，可上传附件" required></textarea>
+                    </div>
+                    <br>
+                    <div align="center">
+                        <button class="btn-default" style="width: 80px" type="submit" onclick="ref()" id="save" hidden>
+                            保存
+                        </button>
+                        <button class="btn-default" style="width: 80px" onclick="check()">保存</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.getElementById('fileToUpload').onchange = function () {
+        // alert("hello");
+        var imgFile = document.getElementById('fileToUpload').files[0];
+        var fr = new FileReader();
+
+        fr.onload = function () {
+            img.src = fr.result;
+        };
+        // 注意要先设置回调再读取文件
+        fr.readAsDataURL(imgFile);
+
+
+    }
+
+</script>
+<script>
+
+    function app() {
+        document.getElementById("appendix").click();
+    }
+
+    function upload() {
+        document.getElementById("fileToUpload").click();
+
+    }
+
+    function ref() {
+  // alert("hello");
+
+        //  window.location.reload();
+    }
+
+
+</script>
+
+</body>
+
+</html>

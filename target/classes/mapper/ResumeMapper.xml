@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.job52.dao.ResumeMapper" >
+
+    <resultMap id="BaseResultMap" type="com.job52.model.Resume" >
+        <id column="rid" property="rid" jdbcType="VARCHAR" />
+        <result column="pid" property="pid" jdbcType="VARCHAR" />
+        <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+        <result column="highest_education" property="highestEducation" jdbcType="VARCHAR" />
+        <result column="gradution_university" property="gradutionUniversity" jdbcType="VARCHAR" />
+        <result column="gradution_time" property="gradutionTime" jdbcType="TIMESTAMP" />
+        <result column="major" property="major" jdbcType="VARCHAR" />
+        <result column="work_exp" property="workExp" jdbcType="LONGVARCHAR" />
+        <result column="isPublic" property="ispublic" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Base_Column_List" >
+        rid, pid, birthday, highest_education, gradution_university, gradution_time, major, 
+        work_exp, isPublic
+    </sql>
+
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select 
+        <include refid="Base_Column_List" />
+        from resume
+        where rid = #{rid,jdbcType=VARCHAR}
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from resume
+        where rid = #{rid,jdbcType=VARCHAR}
+    </delete>
+
+    <insert id="insert" parameterType="com.job52.model.Resume" >
+        insert into resume (rid, pid, birthday, 
+            highest_education, gradution_university, 
+            gradution_time, major, work_exp, 
+            isPublic)
+        values (#{rid,jdbcType=VARCHAR}, #{pid,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, 
+            #{highestEducation,jdbcType=VARCHAR}, #{gradutionUniversity,jdbcType=VARCHAR}, 
+            #{gradutionTime,jdbcType=TIMESTAMP}, #{major,jdbcType=VARCHAR}, #{workExp,jdbcType=LONGVARCHAR}, 
+            #{ispublic,jdbcType=INTEGER})
+    </insert>
+
+    <insert id="insertSelective" parameterType="com.job52.model.Resume" >
+        insert into resume
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                rid,
+            </if>
+            <if test="pid != null" >
+                pid,
+            </if>
+            <if test="birthday != null" >
+                birthday,
+            </if>
+            <if test="highestEducation != null" >
+                highest_education,
+            </if>
+            <if test="gradutionUniversity != null" >
+                gradution_university,
+            </if>
+            <if test="gradutionTime != null" >
+                gradution_time,
+            </if>
+            <if test="major != null" >
+                major,
+            </if>
+            <if test="workExp != null" >
+                work_exp,
+            </if>
+            <if test="ispublic != null" >
+                isPublic,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="rid != null" >
+                #{rid,jdbcType=VARCHAR},
+            </if>
+            <if test="pid != null" >
+                #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="highestEducation != null" >
+                #{highestEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="gradutionUniversity != null" >
+                #{gradutionUniversity,jdbcType=VARCHAR},
+            </if>
+            <if test="gradutionTime != null" >
+                #{gradutionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="major != null" >
+                #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="workExp != null" >
+                #{workExp,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="ispublic != null" >
+                #{ispublic,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updateByPrimaryKeySelective" parameterType="com.job52.model.Resume" >
+        update resume
+        <set >
+            <if test="pid != null" >
+                pid = #{pid,jdbcType=VARCHAR},
+            </if>
+            <if test="birthday != null" >
+                birthday = #{birthday,jdbcType=VARCHAR},
+            </if>
+            <if test="highestEducation != null" >
+                highest_education = #{highestEducation,jdbcType=VARCHAR},
+            </if>
+            <if test="gradutionUniversity != null" >
+                gradution_university = #{gradutionUniversity,jdbcType=VARCHAR},
+            </if>
+            <if test="gradutionTime != null" >
+                gradution_time = #{gradutionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="major != null" >
+                major = #{major,jdbcType=VARCHAR},
+            </if>
+            <if test="workExp != null" >
+                work_exp = #{workExp,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="ispublic != null" >
+                isPublic = #{ispublic,jdbcType=INTEGER},
+            </if>
+        </set>
+        where rid = #{rid,jdbcType=VARCHAR}
+    </update>
+
+    <update id="updateByPrimaryKey" parameterType="com.job52.model.Resume" >
+        update resume
+        set pid = #{pid,jdbcType=VARCHAR},
+            birthday = #{birthday,jdbcType=VARCHAR},
+            highest_education = #{highestEducation,jdbcType=VARCHAR},
+            gradution_university = #{gradutionUniversity,jdbcType=VARCHAR},
+            gradution_time = #{gradutionTime,jdbcType=TIMESTAMP},
+            major = #{major,jdbcType=VARCHAR},
+            work_exp = #{workExp,jdbcType=LONGVARCHAR},
+            isPublic = #{ispublic,jdbcType=INTEGER}
+        where rid = #{rid,jdbcType=VARCHAR}
+    </update>
+</mapper>

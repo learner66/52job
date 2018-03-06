@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <link href="../../bootstrap/css/bootstrap.css" rel="stylesheet">
+    <link href="../../CSS/maincss.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../bootstrap/bootstrap-table.css">
+
+    <script src="../../jquery/jquery-3.2.1.js"></script>
+    <script src="../../javascript/model.js"></script>
+    <script src="../../bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../bootstrap/bootstrap-table.js"></script>
+    <script src="../../bootstrap/bootstrap-table-export.js"></script>
+    <script src="../../bootstrap/tableExport.js"></script>
+
+
+    <style>
+        .inp {
+            width: 200px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body onload="table()">
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top" id="sideNav" style="width: 20%">
+                <br><br>
+
+                <div>
+
+                    <img class="img-fluid img-circle" style="width: 160px;height: 160px" src="../img/profile.jpg"
+                         alt="">
+
+                </div>
+
+                <br>
+                <br>
+                <br>
+                <br>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class=" nav nav-sidebar">
+                        <li>
+                            <a style="color: white" href="#about">企业信息管理</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#experience">简历搜索</a>
+                        </li>
+                        <li class="management">
+                            <a style="color: white" href="#education">职位管理</a>
+                        </li>
+                        <li style="display: none;color: white" class="existinfo">
+                            <a style="color: white" href="#education">已发布职业信息</a>
+                        </li>
+                        <li style="display: none" class="roughinfo">
+                            <a style="color: white" href="#education">草稿箱</a>
+                        </li>
+                        <li style="display: none" class="pastinfo">
+                            <a style="color: white" href="#education">历史职业信息</a>
+                        </li>
+                        <li>
+                            <a style="color: white" href="#skills">应聘管理</a>
+                        </li>
+
+                    </ul>
+                </div>
+            </nav>
+        </div>
+
+        <div class="col-md-10">
+            <br><br><br><br>
+
+            <div class="table-responsive " style="position:relative;left: -40px">
+                <div id="toolbar" class="btn-group">
+                    <button id="btn_add" type="button" class="btn btn-default" onclick="add()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>新增
+                    </button>
+                    <button id="btn_delete" type="button" class="btn btn-default" onclick="del()">
+                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除
+                    </button>
+                </div>
+                <table class="table table-striped " id="table" style="overflow-x:scroll;width: 200%">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function table() {
+
+        $('#table').bootstrapTable({
+            url: '',//修改
+            method: 'get',
+            pagination: true,
+            cache: false,
+            striped: true,
+            toolbar: '#toolbar',
+            pageNumber: 1,
+            pageSize: 3,
+            pageList: [1, 2],
+            showRefresh: true,
+            showColumns: true,
+            showToggle: true,
+            undefinedText: '-',
+            selectItemName: 'select',
+            sortable: true,
+            showExport: true,
+            exportDataType: "basic",
+            exportTypes: ['excel'],
+            clickToSelect: true,
+            maintainSelected: true,
+            search: true,
+            showPaginationSwitch: true,
+            checkboxHeader:true,
+            columns: [{
+                checkbox: true,
+                title: '选择'
+
+            }, {
+                field: 'id',
+                title: 'ID',
+                visible: false
+            }, {
+                field: 'position',//命名需与后台一致
+                title: '职位'
+            }, {
+                field: 'salary',
+                title: '薪酬'
+            }, {
+                field: 'education',
+                title: '学历'
+            }, {
+                field: 'experience',
+                title: '工作经验'
+            }, {
+                field: 'city',
+                title: '工作城市'
+            }, {
+                field: 'introduction',
+                title: '简介'
+            }, {
+                field: 'operate',
+                title: '操作',
+                formatter: function (value, row, index) {
+
+                    var u = '<a href="#" mce_href="#" onclick="update(\'' + row.id + '\',\'' + row.position + '\',\'' + row.salary + '\',\'' + row.education + '\',\'' + row.experience + '\',\'' + row.city + '\',\'' + row.introduction + '\' )" >修改</a> ';
+
+                    return u;
+                }
+            }],
+            data: [{
+                id: 3,
+                position: 12,
+                salary: 100,
+                education: 111,
+                experience: 333,
+                city: 111,
+                introduction: 444
+
+            }, {
+
+                position: 2
+
+            }, {
+                id: 4,
+                position: 3
+            }]
+
+        });
+
+
+    }
+
+    function update(id, position, salary, education, experience, city, introduction) {
+        $("#position2").val(position);
+        $("#salary2").val(salary);
+        $("#education2").val(education);
+        $("#experience2").val(experience);
+        $("#city2").val(city);
+        $("#introduction2").val(introduction);
+        window.localStorage.setItem("upid", id);
+        // alert( window.localStorage.getItem("upid"));
+        $("#mymodel2").modal();
+    }
+
+    function add() {
+        $("#mymodel").modal();
+    }
+
+    function del() {
+        var row = $("#table").bootstrapTable('getSelections');
+        var data = "[";
+        if (row == "") {
+            alert("请选择要删除的数据");
+        } else {
+            for (var i = 0; i < row.length; i++) {
+                data += ' {"id":"' + row[i].id + '" },';
+            }
+            var reg = /,$/gi;
+            data = data.replace(reg, "");
+            data += "]";
+            $.ajax({
+                url: '/v1/node/',
+                type: 'delete',
+                dataType: 'text',
+                data: data,
+
+                success: succFunction,
+                error: erryFunction//成功执行方法????
+            });
+
+
+            function erryFunction() {
+                alert("删除失败");
+            }
+
+            function succFunction() {
+
+
+                alert("删除成功");
+                window.location.reload();
+
+            }
+        }
+
+
+    }
+
+
+</script>
+<div class="modal fade" id="mymodel" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">职位信息</h4>
+            </div>
+            <div class="modal-body" style="position: relative;text-align: center; ">
+                <div><b>职位：</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="position" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>薪酬：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="salary" type="text" class="inp">
+                </div>
+                <br>
+                <div><b>学历：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="education" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>工作经验：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="experience" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>工作城市：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="city" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>简介：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="introduction" type="text"
+                                                                                class="inp"
+                ></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="publish()">发布</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close2">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function publish() {
+        var position = $("#position").val();
+        var salary = $("#salary").val();
+        var education = $("#education").val();
+        var experience = $("#experience").val();
+        var city = $("#city").val();
+        var introduction = $("#introduction").val();
+        var data = {
+            "id":id,
+            "position": position,
+            "salary": salary,
+            "education": education,
+            "experience": experience,
+            "city": city,
+            "introduction": introduction
+        };
+        data = JSON.stringify(data);
+        $.ajax({
+            url: '/v1/node/',//修改
+            type: 'post',
+            dataType: 'text',
+            data: data,
+            success: succFunction,
+            error: erryFunction
+        });
+
+        function erryFunction() {
+            alert("发布失败");
+        }
+
+        function succFunction() {
+            alert("发布成功");
+            $("#close2").click();
+            window.location.reload();
+        }
+    }
+
+
+</script>
+
+<div class="modal fade" id="mymodel2" aria-hidden="true" aria-labelledby="myModalLabel">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel2">职位信息</h4>
+            </div>
+            <div class="modal-body" style="position: relative;text-align: center; ">
+                <div><b>职位：</b> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="position2" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>薪酬：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="salary2" type="text" class="inp">
+                </div>
+                <br>
+                <div><b>学历：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="education2" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>工作经验：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="experience2" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>工作城市：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="city2" type="text" class="inp"
+                ></div>
+                <br>
+                <div><b>简介：</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input id="introduction2" type="text"
+                                                                                class="inp"
+                ></div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="finish()">完成</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal" id="close">关闭</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<script>
+    function finish() {
+        var id=window.localStorage.getItem("uid");
+        var position = $("#position2").val();
+        var salary = $("#salary2").val();
+        var education = $("#education2").val();
+        var experience = $("#experience2").val();
+        var city = $("#city2").val();
+        var introduction = $("#introduction2").val();
+        window.localStorage.clear();
+        var data={
+            "id":id,
+            "position":position,
+            "salary":salary,
+            "education":education,
+            "experience":experience,
+            "city":city,
+            "introducation":introduction
+        };
+        data=JSON.stringify(data);
+        $.ajax({
+            url:"",
+            type:"post",
+            dataType:"text",
+            data:data,
+            success: succFunction,
+            error: erryFunction
+        });
+        function succFunction(){
+            alert("修改失败");
+
+        }
+        function erryFunction() {
+            alert("修改成功");
+            $("#close").click();
+            window.location.reload();
+        }
+    }
+
+</script>
+</body>
+
+</html>
