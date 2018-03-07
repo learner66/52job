@@ -2,17 +2,17 @@
 
 
 #mid{
-	height: 614px;
+	height: 512px;
 	margin-left: 250px;
 	margin-right: 250px;
-	margin-top: 57px;
-	margin-bottom: 57px;
+	margin-top: 30px;
+	margin-bottom: 30px;
 	border: 1px solid;
 
 }
 
 #mid_left{
-	height: 500px;
+	height: 462px;
 	width: 43%;
 	display: inline-block;
 	border: 1px solid;
@@ -21,7 +21,7 @@
 }
 
 #mid_right{
-	height: 500px;
+	height:462px;
 	width: 43%;
 	border: 1px solid;
 	margin-right: 50px;
@@ -35,9 +35,9 @@
 .sweet{
     font-family: mySweet;
     color:#FF891F;
-    font-size: 30px;
-    width: 250px;
-    margin-left:200px ;
+    font-size: 22px;
+    width: 200px;
+    margin-left:100px ;
 }
 
 

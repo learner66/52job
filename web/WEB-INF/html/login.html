@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>用户登录</title>
-    <link rel="stylesheet" href="../bootstrap/css/bootstrap.css"/>
-    <script type="text/javascript" src="../javascript/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="../bootstrap/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../../dist/css/bootstrap.css"/>
+    <script type="text/javascript" src="../../js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="../dist/js/bootstrap.min.js"></script>
     <style>
         body {
             background: #f8f6e9;
@@ -61,14 +61,14 @@
     </style>
 </head>
 <body>
-<form action="" method="post">
+<form action="/person/loginPerson" method="post">
     <div class="mycenter">
         <div class="mysign">
             <div class="col-lg-11 text-center text-info">
                 <h2>用户登录</h2>
             </div>
             <div class="col-lg-10">
-                <input type="text" class="form-control" name="userName" placeholder="请输入账户名" required autofocus/>
+                <input type="text" class="form-control" name="userName" placeholder="用户名/手机/邮箱" required autofocus/>
             </div>
             <div class="col-lg-10"></div>
             <div class="col-lg-10">
@@ -76,7 +76,7 @@
             </div>
             <div class="col-lg-10"></div>
             <div class="col-lg-10 mycheckbox checkbox">
-                <input type="checkbox" class="col-lg-1">记住密码</input>
+                <input type="checkbox" class="col-lg-1">七天内自动登录</input>
             </div>
             <div class="col-lg-10"></div>
             <div class="col-lg-10">

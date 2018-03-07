@@ -5,46 +5,50 @@
 <head>
     <meta charset="UTF-8">
     <title>52job注册</title>
-    <link rel="stylesheet" href="../../CSS/login.css" />
-    <link rel="stylesheet" href="../../bootstrap/css/bootstrap.css" />
-    <script type="text/javascript" src="../../jquery/jquery-3.2.1.js"></script>
-    <script type="text/javascript" src="../../bootstrap/js/bootstrap.js"></script>
-
+    <link rel="stylesheet" href="../../css/login.css" />
+    <link rel="stylesheet" href="../../dist/css/bootstrap.css" />
+    <script type="text/javascript" src="../../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../../dist/js/bootstrap.js"></script>
     <script>
-        var isUserName = false; //判断用户名格式是否正确
         var isPwd = false; //判断密码是否符合要求
+        var isPwd2 =false;
+        var isContact = false;
+        <!--前台校验-->
         $(document).ready(function(){
-
-            $("#userName").blur(function () {
+            <!--校验联系方式-->
+            $("#userName").blur(function(){
                 var userName= document.getElementById('userName').value;
                 if ((/^1[34578]\d{9}$/.test(userName))||
                     /^([a-z0-9A-Z]+[-|\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\.)+[a-zA-Z]{2,}$/.test(userName)) {
-                    isUserName = true;
-                    isSend();
-                    is_check();
+                    isContact = true;
+                    isSend(); //验证码错误不能点击发送验证码
+                    is_check();//不能点击注册按钮
                     document.getElementById("userWarn").setAttribute("style","color: green;margin-left: 20px;");
                     return document.getElementById('userWarn').innerHTML = 'ok';
                 } else {
-                    isUserName=false;
-                    isSend();
+                    isContact=false;
+                    isSend(); //不能发送验证码
+                    is_check();//不能点击注册按钮
                     document.getElementById("userWarn").setAttribute("style","color: red;margin-left: 20px;");
                     return document.getElementById('userWarn').innerHTML = '请输入正确格式的手机或邮箱';
                     return false;
                 }
 
             });
-
+            <!--校验密码-->
             $("#passWord").blur(function(){
-                var pwd=document.getElementById('passWord').value;
+                var pwd = document.getElementById('passWord').value;
                 ///^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){5,15}$/   只能输入6-16个以字母开头、可带数字、“_”、“.”的字串
                 if(!(/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){5,15}$/.test(pwd))){
                     isPwd = false;
                     isSend();
+                    is_check();
                     document.getElementById("pwdWarn").setAttribute("style","color: red;margin-left: 20px;");
                     return document.getElementById('pwdWarn').innerHTML = '请输入符合要求的密码';
                     return false;
                 }
                 else{
+                    testPwd();
                     isPwd = true;
                     isSend();
                     is_check();
@@ -52,9 +56,34 @@
                     return document.getElementById('pwdWarn').innerHTML = 'ok';
                 }
 
+
             });
+            <!--确认密码-->
+            $("#passWord2").blur(function () {
+                testPwd()
+            });
+            function testPwd(){
+                var pwd = document.getElementById('passWord').value;
+                var pwd2 =document.getElementById('passWord2').value;
+                if((pwd2==null||pwd2!="")&&pwd!=null&pwd!=""){
+                    if(pwd==pwd2){
+                        isPwd2 = true;
+                        isSend();
+                        is_check();
+                        document.getElementById("pwdWarn2").setAttribute("style","color: green;margin-left: 20px;");
+                        return document.getElementById('pwdWarn2').innerHTML = 'ok';
+                    }else{
+                        isPwd2 = false;
+                        isSend();
+                        is_check();
+                        document.getElementById("pwdWarn2").setAttribute("style","color: red;margin-left: 20px;");
+                        return document.getElementById('pwdWarn2').innerHTML = '两次密码不一致';
+                        return false;
+                    }
+                }
+            }
             function isSend() {
-                if(isPwd&&isUserName){
+                if(isPwd&&isContact&isPwd2){
                     var val = document.getElementById('sendCode');
                     val.removeAttribute("disabled");
 
@@ -69,7 +98,8 @@
         function  is_check() {
             var status = document.getElementById("cbox");
             var register = document.getElementById("register");
-            if(status.checked&&isPwd&&isUserName){
+            //复选框被选中，且密码和用户名格式正确才能点击注册
+            if(status.checked&&isPwd&&isContact&isPwd2){
                 register.removeAttribute("disabled");
             }else{
                 register.setAttribute("disabled", true);
@@ -140,7 +170,7 @@
 
 </head>
 
-<body style="background:#EEEEEE;background-size: 100% 100%;margin: auto;">
+<body style="background:#f8f6e9;background-size: 100% 100%;margin: auto;">
 
 <div style="border-bottom: 1px solid;height: auto;">
     <div style="border-bottom:1px solid ;height: 40px;line-height: 40px; text-align: left;">
@@ -167,21 +197,28 @@
                 </p>
 
                 <form role="form" action="register" method="POST">
-                    <div class="row" style="margin-top: 25px;">
+                    <div class="row" style="margin-top: 15px;">
                         <div class="form-group col-sm-12">
                             <label for="userName">账号</label><span id="userWarn" ></span>
                             <input type="text" class="form-control" id="userName" name="userName" placeholder="手机号/邮箱号" onblur="isSend()">
                         </div>
                     </div>
 
-                    <div class="row" style="margin-top: 15px;">
+                    <div class="row" style="margin-top: 0px;">
                         <div class="form-group col-sm-12">
                             <label for="passWord">密码</label></label><span id="pwdWarn" ></span>
                             <input type="password" class="form-control" id ="passWord" name="passWord" placeholder="密码(6-16位字母、数字、无空格)" onblur="isSend()">
                         </div>
                     </div>
 
-                    <div class="row" style="margin-top: 25px;">
+                    <div class="row" style="margin-top: 0px;">
+                        <div class="form-group col-sm-12">
+                            <label for="passWord2">确认密码</label></label><span id="pwdWarn2" ></span>
+                            <input type="password" class="form-control" id ="passWord2" name="passWord2" placeholder="重新输入密码" onblur="isSend()">
+                        </div>
+                    </div>
+
+                    <div class="row" style="margin-top: 0px;">
                         <div class="form-group col-sm-6  form-horizontal">
                             <input type="text" class="form-control" id="safecode" name="verifyNum" placeholder="验证码">
                         </div>
@@ -194,20 +231,20 @@
                         <input type="button" id="sendCode" class="btn btn-default" value="免费获取验证码" disabled="true" onclick="settime(this),publish()" />
                     </div>
 
-                    <div class="row" style="margin-top: 25px;text-align: center;">
+                    <div class="row" style="margin-top: 10px;text-align: center;">
                         <div class="form-group">
                             <button type="submit" class="btn btn-default btn-danger" style="width: 300px;" id="register"  disabled="true">免费注册</button>
                         </div>
                     </div>
 
-                    <div class="row" style="margin-top: 15px;text-align: center;">
+                    <div class="row" style="margin-top: 0px;text-align: center;">
                         <input type="checkbox" class="" value="我已阅读并同意用户协议" id="cbox" onchange="is_check()">
                         <label>我已阅读并同意<a href="../../docs/user.html" style="text-decoration: none">用户协议</a></label>
                     </div>
 
-                    <div class="row" style="margin-top: 15px;text-align: center;">
+                    <div class="row" style="margin-top: 5px;text-align: center;">
                         <label>已有账号</label>
-                        <a href="#">点击登录</a>
+                        <a href="/person/goLogin">点击登录</a>
                     </div>
                 </form>
 

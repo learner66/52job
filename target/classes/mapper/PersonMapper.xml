@@ -22,6 +22,19 @@
         where pid = #{pid,jdbcType=VARCHAR}
     </select>
 
+    <select id="findLastId" resultType="java.lang.Integer">
+        SELECT pid FROM person ORDER BY pid DESC LIMIT 1;
+    </select>
+
+    <!--通过用户名和密码来查找用户-->
+    <select id="findPersonByNameAndPwd"  parameterType="com.job52.model.Person" resultType="com.job52.model.Person">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM person
+        WHERE (user_name = #{userName} OR phone = #{phone} OR email = #{email})
+        AND pass_word = #{passWord}
+    </select>
+
     <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
         delete from person
         where pid = #{pid,jdbcType=VARCHAR}
