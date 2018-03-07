@@ -6,91 +6,7 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="53d9f621-79d6-4f12-8eda-06b13de9acf1" name="Default" comment="张康熙">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/52job/web/CSS/login.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/CSS/maincss.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/admin-company.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/admin-data.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/admin-person.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/admin-position.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/bootstraptable.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/company-applymentmanageF.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/company-applymentmanageP.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/company-existpositioninfo.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/company-pastpositioninfo.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/company-roughpositioninfo.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/login.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/model.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/person-resumecreate.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/WEB-INF/html/person-resumemanage.html" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-editable.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-editable.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-table-editable.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-table-export.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-table-zh-CN.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-table.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/bootstrap-table.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.css" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap-theme.css" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap-theme.css.map" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.min.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap-theme.min.css" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.min.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap-theme.min.css.map" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap-theme.min.css.map" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.css.map" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap.css.map" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.min.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.min.css" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap.min.css" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.min.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/css/bootstrap.min.css.map" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap.min.css.map" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/web/bootstrap/fonts/glyphicons-halflings-regular.eot" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/web/bootstrap/fonts/glyphicons-halflings-regular.svg" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/web/bootstrap/fonts/glyphicons-halflings-regular.ttf" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/web/bootstrap/fonts/glyphicons-halflings-regular.woff" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/fonts/glyphicons-halflings-regular.woff2" afterPath="$PROJECT_DIR$/web/bootstrap/fonts/glyphicons-halflings-regular.woff2" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/bootstrap.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/bootstrap.js" afterPath="$PROJECT_DIR$/web/bootstrap/js/bootstrap.js" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/bootstrap.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/bootstrap.min.js" afterPath="$PROJECT_DIR$/web/bootstrap/js/bootstrap.min.js" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/npm.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/js/npm.js" afterPath="$PROJECT_DIR$/web/bootstrap/js/npm.js" />
-      <change beforePath="$PROJECT_DIR$/52job/web/bootstrap/tableExport.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/img/profile.jpg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/javascript/model.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/jquery/jquery-3.2.1.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/jquery/jquery-3.2.1.js" afterPath="$PROJECT_DIR$/web/jquery/jquery-3.2.1.js" />
-      <change beforePath="$PROJECT_DIR$/52job/web/jquery/jquery.validate.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/52job/web/jquery/messages_zh.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/kkk_war_exploded/WEB-INF/html/index.html" afterPath="$PROJECT_DIR$/classes/artifacts/kkk_war_exploded/WEB-INF/html/index.html" />
-      <change beforePath="$PROJECT_DIR$/test/zhang.txt" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/html/index.html" afterPath="$PROJECT_DIR$/web/WEB-INF/html/index.html" />
-      <change beforePath="$PROJECT_DIR$/web/WEB-INF/html/login.html" afterPath="$PROJECT_DIR$/web/WEB-INF/html/login.html" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap-theme.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap-theme.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap-theme.min.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap-theme.min.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap.css" afterPath="$PROJECT_DIR$/web/bootstrap/css/bootstrap.css" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap.min.css" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/css/bootstrap.min.css.map" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/fonts/glyphicons-halflings-regular.eot" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/fonts/glyphicons-halflings-regular.svg" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/fonts/glyphicons-halflings-regular.woff" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/bootstrap.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/bootstrap.min.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/dist/js/npm.js" afterPath="" />
-      <change beforePath="$PROJECT_DIR$/web/js/jquery-3.2.1.js" afterPath="" />
-    </list>
+    <list default="true" id="53d9f621-79d6-4f12-8eda-06b13de9acf1" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -1100,7 +1016,7 @@
       <workItem from="1520328454609" duration="182000" />
       <workItem from="1520331153275" duration="4542000" />
       <workItem from="1520335949103" duration="5455000" />
-      <workItem from="1520383413030" duration="9082000" />
+      <workItem from="1520383413030" duration="9389000" />
     </task>
     <task id="LOCAL-00001" summary="person注册">
       <created>1520303874478</created>
@@ -1144,7 +1060,14 @@
       <option name="project" value="LOCAL" />
       <updated>1520390812545</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="张康熙">
+      <created>1520393240473</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1520393240473</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1180,7 +1103,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136290000" />
+    <option name="totallyTimeSpent" value="136597000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1193,10 +1116,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1318" height="784" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23919754" sideWeight="0.22734499" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7731481" sideWeight="0.3807631" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3271605" sideWeight="0.4872814" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1213,7 +1135,7 @@
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973805" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23919754" sideWeight="0.772655" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.7731481" sideWeight="0.6192369" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32973805" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.45833334" sideWeight="0.7186009" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.26152623" sideWeight="0.67777777" order="0" side_tool="false" content_ui="combo" />
@@ -1467,6 +1389,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="154">
           <caret line="14" column="28" lean-forward="false" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1594,11 +1517,11 @@
         <state relative-caret-position="383">
           <caret line="76" column="26" lean-forward="false" selection-start-line="76" selection-start-column="26" selection-end-line="76" selection-end-column="26" />
           <folding>
-            <element signature="e#856#857#0" expanded="true" />
-            <element signature="e#887#888#0" expanded="true" />
-            <element signature="e#965#966#0" expanded="true" />
-            <element signature="e#996#997#0" expanded="true" />
-            <element signature="e#1328#1344#0" expanded="true" />
+            <element signature="e#856#857#0" expanded="false" />
+            <element signature="e#887#888#0" expanded="false" />
+            <element signature="e#965#966#0" expanded="false" />
+            <element signature="e#996#997#0" expanded="false" />
+            <element signature="e#1328#1344#0" expanded="false" />
           </folding>
         </state>
       </provider>
