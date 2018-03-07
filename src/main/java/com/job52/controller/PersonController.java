@@ -22,14 +22,22 @@ public class PersonController {
     @Autowired
     private PersonService personService;
 
+    //跳转到index界面
     @RequestMapping("/index")
     public String index() {
         return "/index";
     }
 
+
+    //跳转到login界面
+    @RequestMapping("/goLogin")
+    public String login(){
+        return "/login";
+    }
+
     /**
      * 向用户发送验证码
-     * @param userName 用户手机/邮箱
+     * @param contactName 用户手机/邮箱
      * @return 操作结果，向前段ajax返回json串。
      * @throws Exception 异常信息
      */
@@ -60,54 +68,68 @@ public class PersonController {
                 session.setAttribute("verifyCode",verifyCode);
             }
         }
-        modelMap.put("msg",verifyCode);
+        modelMap.put("msg","失败");
         return modelMap;
     }
 
     /**
      * 接收用户的注册信息
      * @param person  注册信息
-     * @param response  响应
      * @param request  请求
      * @param session  会话
      * @return 如果成功注册，跳转到登录界面。如果失败，回到注册页面。
      */
     @RequestMapping("/register")
-    public String registerPerson(Person person, HttpServletRequest request, HttpSession session, HttpServletResponse response) throws Exception {
+    public String registerPerson(Person person, HttpServletRequest request, HttpSession session) throws Exception {
         String verifyCode = (String) session.getAttribute("verifyCode");
         String verifyNum = request.getParameter("verifyNum");
-        if(!verifyNum.equals(verifyCode)){
-            request.setAttribute("verifyMsg","验证码错误");
-            throw new Exception("验证码错误");
-        }else{
-          if(personService.registerPerson(person)){
-              request.getSession().removeAttribute("verifyNum");
-              return "redirect:/person/index";
-          }else{
-              throw new Exception("验证码错误");
-          }
+        String pwd = request.getParameter("passWord");
+        String pwd2 = request.getParameter("passWord2");
+        if(!pwd.equals(pwd2)){
+            request.setAttribute("verifyMsg","两次密码不一致");
+            return "forward:/index";
+        }else {
+            if (!verifyNum.equals(verifyCode)) {
+                request.setAttribute("verifyMsg", "验证码错误");
+                throw new Exception("验证码错误");
+            } else {
+                if (personService.registerPerson(person)) {
+                    request.getSession().removeAttribute("verifyNum");
+                    return "redirect:/person/index";
+                } else {
+                    throw new Exception("注册失败");
+                }
+            }
         }
     }
 
 
     /**
      * 个人用户登录
-     * @param password 用户密码
-     * @param username 登录名
+     * @param passWord 用户密码
+     * @param userName 登录名
      * @return 跳转地址
      * 无需判断用户账号是什么类型的，直接获取到用户的信息到数据库中进行查找即可
+     * 另外该方法还需要处理自动登录的操作
      */
-    @RequestMapping("login")
-    public String  loginPerson(String username,String password) throws Exception{
+    @RequestMapping("/loginPerson")
+    public String  loginPerson(String userName,String passWord,HttpServletRequest request) throws Exception{
         Person person = new Person();
-        person.setEmail(username);  //用户使用邮箱登录
-        person.setUserName(username);//用户使用用户名登录
-        person.setPhone(username);//用户使用手机登录
-        if(personService.personLogin(person)){
-            //登录成功，跳转到主页
+        person.setEmail(userName);  //用户使用邮箱登录
+        person.setUserName(userName);//用户使用用户名登录
+        person.setPhone(userName);//用户使用手机登录
+        person.setPassWord(passWord);
+        Person p = personService.personLogin(person);
+        if(p==null){
+            //登录失败，跳转到登录页面
+            return "forward:/login";
+        }else{
+            //登录成功，1.要把用户的主键放到session域中 2.跳转到主页面
+            String pid =  p.getPid();
+            request.getSession().setAttribute("pid",pid);
+            return "/login";
         }
-        //登录失败，跳转到登录页面
-        return null;
+
     }
 
     /**

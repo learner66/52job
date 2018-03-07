@@ -13,20 +13,20 @@ public interface PersonService {
      * @param person  个人注册信息
      * @throws Exception 异常信息
      */
-    public boolean registerPerson(Person person) throws Exception;
+     boolean registerPerson(Person person) throws Exception;
     /**
      * 个人用户登录
      * @param person 个人登录信息
      * @throws Exception 异常信息
      */
-    public boolean personLogin(Person person) throws Exception;
+    Person personLogin(Person person) throws Exception;
     /**
      * 更新个人用户基本信息，包括头像，昵称
      * @param pid 个人用户的id
      * @param person 个人用户信息
      * @throws Exception 异常信息
      */
-    public boolean updatePersonInfo(String pid,Person person) throws Exception;
+     boolean updatePersonInfo(String pid,Person person) throws Exception;
 
     /**
      * 更新绑定手机
@@ -34,7 +34,7 @@ public interface PersonService {
      * @param phone 用户更新的手机
      * @throws Exception 异常信息
      */
-    public boolean UpdatePersonPhone(String pid,String phone) throws Exception;
+     boolean UpdatePersonPhone(String pid,String phone) throws Exception;
 
     /**
      * 更新绑定邮箱
@@ -42,7 +42,7 @@ public interface PersonService {
      * @param Email 个人用户更新的邮箱
      * @throws Exception 异常信息
      */
-    public boolean updatePersonEmail(String pid,String Email) throws Exception;
+     boolean updatePersonEmail(String pid,String Email) throws Exception;
 
     /**
      * 查询用户信息
@@ -50,7 +50,7 @@ public interface PersonService {
      * @return 满足条件的用户信息
      * @throws Exception 异常信息
      */
-    public Person queryPerson(String pid) throws Exception;
+     Person queryPerson(String pid) throws Exception;
 
 
 

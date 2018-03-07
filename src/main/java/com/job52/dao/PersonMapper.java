@@ -45,5 +45,17 @@ public interface PersonMapper {
      */
     int updateByPrimaryKey(Person record);
 
+    /**
+     * 根据用户名和密码来查找用户
+     * @param person 用户信息
+     * @return
+     */
+    Person findPersonByNameAndPwd(Person person);
+
+    /**
+     * 查找最后一个id
+     * @return 返回最新的一个id
+     */
+    int findLastId();
 
 }
