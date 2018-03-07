@@ -10,9 +10,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,7 +40,7 @@ public class PersonController {
 
     /**
      * 向用户发送验证码
-     * @param contactName 用户手机/邮箱
+     * @param userName 用户手机/邮箱
      * @return 操作结果，向前段ajax返回json串。
      * @throws Exception 异常信息
      */
@@ -108,12 +111,14 @@ public class PersonController {
      * 个人用户登录
      * @param passWord 用户密码
      * @param userName 登录名
+     * @param request 请求域
+     * @param response 响应域
      * @return 跳转地址
      * 无需判断用户账号是什么类型的，直接获取到用户的信息到数据库中进行查找即可
      * 另外该方法还需要处理自动登录的操作
      */
     @RequestMapping("/loginPerson")
-    public String  loginPerson(String userName,String passWord,HttpServletRequest request) throws Exception{
+    public String  loginPerson(String userName,String passWord,HttpServletRequest request,HttpServletResponse response) throws Exception{
         Person person = new Person();
         person.setEmail(userName);  //用户使用邮箱登录
         person.setUserName(userName);//用户使用用户名登录
@@ -125,8 +130,20 @@ public class PersonController {
             return "forward:/login";
         }else{
             //登录成功，1.要把用户的主键放到session域中 2.跳转到主页面
-            String pid =  p.getPid();
-            request.getSession().setAttribute("pid",pid);
+            request.getSession().setAttribute("pid",p.getPid());
+            //判断是否有自动登录的标志，如果有，则进行自动登录
+            String autoLogin = (String) request.getAttribute("autoLogin");
+            if("checked".equals(autoLogin)){
+                Cookie cookie = new Cookie("autoLogin", URLEncoder.encode(p.getUserName()+":"+p.getPassWord(), "utf-8"));
+                cookie.setMaxAge(3600*24*7);
+                cookie.setPath(request.getContextPath());
+                response.addCookie(cookie);
+            }else{//如果不选择自动登录，则要清除原来的cookie信息
+                Cookie cookie = new Cookie("autoLogin","");
+                cookie.setMaxAge(0);
+                cookie.setPath(request.getContextPath());
+                response.addCookie(cookie);
+            }
             return "/login";
         }
 
